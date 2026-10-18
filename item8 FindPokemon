@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class FindPokemon {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int H = sc.nextInt();
+        int W = sc.nextInt();
+        int[][] A = new int[H][W];
+        for (int i = 0; i < H; i++) {
+            for (int j = 0; j < W; j++) {
+                A[i][j] = sc.nextInt();
+            }
+        }
+
+        int maxSum = -1;
+        int bestR = -1, bestC = -1;
+
+        for (int i = 0; i < H; i++) {
+            for (int j = 0; j < W; j++) {
+                if (j + 1 < W && Math.abs(A[i][j] - A[i][j + 1]) <= 10) {
+                    int sum = A[i][j] + A[i][j + 1];
+                    if (sum > maxSum) {
+                        maxSum = sum; bestR = i; bestC = j;
+                    }
+                }
+                if (i + 1 < H && Math.abs(A[i][j] - A[i + 1][j]) <= 10) {
+                    int sum = A[i][j] + A[i + 1][j];
+                    if (sum > maxSum) {
+                        maxSum = sum; bestR = i; bestC = j;
+                    }
+                }
+            }
+        }
+        System.out.println(bestR + " " + bestC);
+    }
+}
