@@ -1,0 +1,25 @@
+import java.util.Arrays;
+
+public class AscendSortFreq {
+    private double[] A;
+
+    public AscendSortFreq(double[] A) {
+        this.A = A;
+    }
+
+    public double[] AscendSort(double[] A) {
+        double[] B = Arrays.copyOf(A, A.length);
+        Arrays.sort(B);
+        return B;
+    }
+
+    public double[] SortCommuFreq(double[] B) {
+        double[] C = new double[B.length];
+        double sum = 0;
+        for (int i = 0; i < B.length; i++) {
+            sum += B[i];
+            C[i] = sum;
+        }
+        return C;
+    }
+}
