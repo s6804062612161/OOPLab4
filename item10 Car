@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class AvoidObstacles {
+    static int m, n, t;
+    static int[][] obs;
+    static int[] ans;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        m = sc.nextInt();
+        n = sc.nextInt();
+        t = sc.nextInt();
+        obs = new int[t + 1][m + 1];
+        for (int i = 1; i <= t; i++) {
+            for (int j = 1; j <= m; j++) {
+                obs[i][j] = sc.nextInt();
+            }
+        }
+        ans = new int[t + 1];
+        solve(1, n);
+    }
+
+    static boolean solve(int time, int currentLane) {
+        if (time > t) return true;
+
+        int[] choices = {3, 1, 2};
+        int[] nextLanes = {currentLane, currentLane - 1, currentLane + 1};
+
+        for (int k = 0; k < 3; k++) {
+            int nextLane = nextLanes[k];
+            int choice = choices[k];
+            if (nextLane >= 1 && nextLane <= m && obs[time][nextLane] == 0) {
+                ans[time] = choice;
+                if (solve(time + 1, nextLane)) {
+                    if (time == 1) {
+                        for (int i = 1; i <= t; i++) System.out.println(ans[i]);
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
