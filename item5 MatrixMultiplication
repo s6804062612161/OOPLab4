@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class MatrixMultiplication {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int L = sc.nextInt();
+        int[][] A = new int[N][L];
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < L; j++)
+                A[i][j] = sc.nextInt();
+
+        int L2 = sc.nextInt();
+        int M = sc.nextInt();
+        int[][] B = new int[L2][M];
+        for (int i = 0; i < L2; i++)
+            for (int j = 0; j < M; j++)
+                B[i][j] = sc.nextInt();
+
+        int[][] C = new int[N][M];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                for (int k = 0; k < L; k++) {
+                    C[i][j] += A[i][k] * B[k][j];
+                }
+                System.out.print(C[i][j] + (j == M - 1 ? "" : " "));
+            }
+            System.out.println();
+        }
+    }
+}
