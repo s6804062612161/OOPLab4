@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+public class OilDeposits {
+    static int m, n;
+    static char[][] grid;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            m = sc.nextInt();
+            n = sc.nextInt();
+            if (m == 0) break;
+            grid = new char[m][n];
+            for (int i = 0; i < m; i++) {
+                grid[i] = sc.next().toCharArray();
+            }
+
+            int count = 0;
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (grid[i][j] == '@') {
+                        count++;
+                        dfs(i, j);
+                    }
+                }
+            }
+            System.out.println(count);
+        }
+    }
+
+    static void dfs(int r, int c) {
+        if (r < 0 || r >= m || c < 0 || c >= n || grid[r][c] != '@') return;
+        grid[r][c] = '*';
+        for (int dr = -1; dr <= 1; dr++) {
+            for (int dc = -1; dc <= 1; dc++) {
+                if (dr != 0 || dc != 0) dfs(r + dr, c + dc);
+            }
+        }
+    }
+}
