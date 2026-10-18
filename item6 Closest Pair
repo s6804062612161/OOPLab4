@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class ClosestPair {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        double[][] points = new double[n][13];
+        for (int i = 0; i < n; i++) {
+            points[i] = sc.nextDouble();
+            points[i][6] = sc.nextDouble();
+        }
+
+        double minDistance = Double.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                double dx = points[i] - points[j];
+                double dy = points[i][6] - points[j][6];
+                double dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                }
+            }
+        }
+        System.out.printf("%.2f\n", minDistance);
+    }
+}
