@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class MinTwoSet {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] w = new int[n];
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            w[i] = sc.nextInt();
+            sum += w[i];
+        }
+
+        boolean[] dp = new boolean[sum / 2 + 1];
+        dp = true;
+        for (int num : w) {
+            for (int j = sum / 2; j >= num; j--) {
+                dp[j] = dp[j] || dp[j - num];
+            }
+        }
+
+        int sumA = 0;
+        for (int j = sum / 2; j >= 0; j--) {
+            if (dp[j]) {
+                sumA = j;
+                break;
+            }
+        }
+        int sumB = sum - sumA;
+        System.out.println(Math.abs(sumA - sumB));
+    }
+}
